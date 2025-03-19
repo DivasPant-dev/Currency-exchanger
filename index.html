@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Us to Inr</title>
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: start;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            gap: 30px;
+        }
+
+        #display {
+            margin-top: 150px;
+            margin-bottom: 50px;
+        }
+
+        @media screen and (max-width: 450px) {
+            .container {
+                flex-direction: column;
+            }
+        }   
+    </style>
+</head>
+<body>
+    <h1>
+        Currency exchange (Us to Inr) or (Inr to Us)
+    </h1>
+
+    <input readonly id="display" placeholder="Display">
+
+    <div class="container">
+        <input type="number" placeholder="US$" id="dollar">
+        <input type="number" placeholder="Inr(Rs)" id="rupee">
+        
+        <div class="small">
+            <button class="btn" onclick="exchange()">Exchange</button>
+        </div>
+    </div>
+
+
+
+    <script>
+        function exchange() {
+            const display = document.getElementById("display");
+            const inr = document.getElementById("rupee");
+            const dol = document.getElementById("dollar");
+            const inrF = parseFloat(document.getElementById("rupee").value);
+            const dolF = parseFloat(document.getElementById("dollar").value);
+
+            if (isNaN(inrF) && isNaN(dolF)) {
+                display.value = "Error";
+            } else if (inr.value != "" && dol.value != "") {
+                display.value = "Enter value in one box only"
+                inr.value = "";
+                dol.value = "";
+            }
+            
+            else if (isNaN(inrF)) {
+                let dollar = dol.value * 86.66;
+                display.value = `Rs ${dollar}`;
+                dol.value = "";
+            } else if (isNaN(dolF)) {
+                let rupee = inr.value * 0.012;
+                display.value = `$ ${rupee}`;
+                inr.value = "";
+            }
+        }
+    </script>
+</body>
+</html>
